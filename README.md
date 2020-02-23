@@ -4,7 +4,7 @@
 
 ## 如何使用
 
-请参考 `fast-code-admin`
+请参考 [fast-code-admin](fast-code-admin)
 1. 引入`stater`
     ```xml
     <dependency>
@@ -25,3 +25,9 @@
 
     打开浏览器 [fast-code](http://localhost:8080/fastCode)
     
+4. 表配置
+
+5. 代码生成
+
+## `fast-code` 配置生成页面
+![fast-code](demo.png)
