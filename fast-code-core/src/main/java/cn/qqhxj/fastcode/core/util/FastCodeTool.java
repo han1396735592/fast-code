@@ -38,7 +38,7 @@ public class FastCodeTool {
     public String readFile(String path) {
         File metaDataFile = new File(path);
         if (metaDataFile.exists()) {
-            BufferedReader bufferedReader;
+            BufferedReader bufferedReader = null;
             try {
                 bufferedReader = new BufferedReader(new FileReader(metaDataFile));
                 StringBuilder sb = new StringBuilder();
@@ -50,6 +50,14 @@ public class FastCodeTool {
                 return sb.toString();
             } catch (Exception e) {
                 e.printStackTrace();
+            }finally {
+                if (bufferedReader!=null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         return null;
