@@ -4,14 +4,9 @@ spring:
     username: root
     password: 123456
 server:
-  port: 10001
-mybatis-plus:
-  check-config-location: false
-  global-config:
-    enable-sql-runner: true
+  port: 8080
 logging:
   level:
     cn.qqhxj: debug
 fast-code:
   configPath: config
-debug: true
