@@ -1,0 +1,32 @@
+{
+  "search": {
+    "type": "switch",
+    "default": false,
+    "label": "顶部搜索"
+  },
+  "edit": {
+    "type": "switch",
+    "default": true,
+    "label": "可编辑"
+  },
+  "dateFormat": {
+    "type": "input",
+    "default": "yyyy-MM-DD hh:mm:ss",
+    "label": "日期类型 format"
+  },
+  "inputType": {
+    "type": "select",
+    "default": "input",
+    "label": "数据类型",
+    "selectList": [
+      "input",
+      "textarea",
+      "select",
+      "radio",
+      "date",
+      "time",
+      "dateTime",
+      "image"
+    ]
+  }
+}

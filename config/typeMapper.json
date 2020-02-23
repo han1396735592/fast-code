@@ -1,0 +1,30 @@
+[
+  {
+    "columnType": "int(\\(\\d+\\))?",
+    "javaType": "java.lang.Integer"
+  },
+  {
+    "columnType": "bigint(\\(\\d+\\))?",
+    "javaType": "java.lang.Long"
+  },
+  {
+    "columnType": "char(\\(\\d+\\))?",
+    "javaType": "java.lang.String"
+  },
+  {
+    "columnType": "varchar(\\(\\d+\\))?",
+    "javaType": "java.lang.String"
+  },
+  {
+    "columnType": "decimal(\\(\\d+\\))?",
+    "javaType": "java.lang.Double"
+  },
+  {
+    "columnType": "decimal(\\(\\d+,\\d+\\))?",
+    "javaType": "java.lang.Double"
+  },
+  {
+    "columnType": "bigint(\\(\\d+\\)) unsigned",
+    "javaType": "java.lang.Long"
+  }
+]

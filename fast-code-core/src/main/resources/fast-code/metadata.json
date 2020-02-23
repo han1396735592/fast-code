@@ -1,0 +1,30 @@
+{
+  "author": "han xinjian",
+  "path": "src/main/java",
+  "package": "cn.qqhxj.demo",
+  "entity": {
+    "classSuffix": "",
+    "packageSuffix": "entity",
+    "fileSuffix": ".java"
+  },
+  "dao": {
+    "classSuffix": "Dao",
+    "packageSuffix": "dao",
+    "fileSuffix": ".java"
+  },
+  "service": {
+    "classSuffix": "Service",
+    "packageSuffix": "service",
+    "fileSuffix": ".java"
+  },
+  "serviceImpl": {
+    "classSuffix": "ServiceImpl",
+    "packageSuffix": "service.impl",
+    "fileSuffix": ".java"
+  },
+  "controller": {
+    "classSuffix": "Controller",
+    "packageSuffix": "controller",
+    "fileSuffix": ".java"
+  }
+}

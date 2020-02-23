@@ -1,0 +1,32 @@
+{
+  "alias": {
+    "type": "input",
+    "label": "别名"
+  },
+  "showType": {
+    "type": "select",
+    "label": "显示类型",
+    "selectList": [
+      "list",
+      "page"
+    ]
+  },
+  "editStyle": {
+    "label": "编辑风格",
+    "type": "select",
+    "default": "drawer",
+    "selectList": [
+      "popUps",
+      "drawer"
+    ]
+  },
+  "tree": {
+    "type": "switch",
+    "label": "树结构",
+    "default": false
+  },
+  "relationTable": {
+    "label": "关联表",
+    "type": "textarea"
+  }
+}
