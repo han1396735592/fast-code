@@ -25,9 +25,11 @@
 
     打开浏览器 [fast-code](http://localhost:8080/fastCode)
     
-4. 表配置
+4. 模板设计
+    请参考 [config](config)
+5. 表配置
 
-5. 代码生成
+6. 代码生成
 
 ## `fast-code` 配置生成页面
 ![fast-code](demo.png)
