@@ -53,6 +53,7 @@ const vm = new Vue({
             const that = this
             axios.post("/fastCode/generate/project", {...that.gen, group: that.group, save: true}).then(res => {
                 console.log(res)
+                that.$message.info("生成成功")
             })
         },
         previewSubmit() {
@@ -61,6 +62,7 @@ const vm = new Vue({
             axios.post("/fastCode/preview/template", {...that.pre, ...that.group}).then(res => {
                 console.log(res)
                 that.previewCode = res.data
+                that.$message.info("预览成功")
             })
         },
         saveSubmit() {
