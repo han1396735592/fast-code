@@ -36,21 +36,15 @@ public abstract class MysqlDbDao implements DbDao {
         ArrayList<String> arrayList = new ArrayList<>();
         Connection connection = getConnection();
         try {
-            ResultSet show_tables = connection.createStatement().executeQuery("show tables");
-            while (show_tables.next()) {
-                arrayList.add(show_tables.getString(1));
+            ResultSet showTables = connection.createStatement().executeQuery("show tables");
+            while (showTables.next()) {
+                arrayList.add(showTables.getString(1));
             }
-            show_tables.close();
+            showTables.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+           releaseConnection(connection);
         }
         return arrayList;
 
@@ -71,7 +65,7 @@ public abstract class MysqlDbDao implements DbDao {
         String path = fastCodeHelper.getTableDataPath();
         TableInfo tableInfo = new TableInfo();
         String extJson = tool.readFile(path + File.separator + name + ".json");
-        JSONObject extHashMap = null;
+        JSONObject extHashMap;
         JSONObject columnExt = null;
         if (!tool.stringIsEmpty(extJson)) {
             extHashMap = JSONObject.parseObject(extJson);
@@ -87,9 +81,8 @@ public abstract class MysqlDbDao implements DbDao {
         tableInfo.setName(name);
         JSONObject finalColumnExt = columnExt;
         List<ColumnInfo> columnInfoList = new ArrayList<>();
-
+        Connection connection = getConnection();
         try {
-            Connection connection = getConnection();
             ResultSet resultSet = connection.createStatement().executeQuery("select * from information_schema.COLUMNS where TABLE_SCHEMA = (select database()) and TABLE_NAME ='" + name + "'");
             while (resultSet.next()) {
                 ColumnInfo fieldInfo = new ColumnInfo();
@@ -107,12 +100,10 @@ public abstract class MysqlDbDao implements DbDao {
                 columnInfoList.add(fieldInfo);
             }
             resultSet.close();
-            if (connection!=null){
-                connection.close();
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            releaseConnection(connection);
         }
         tableInfo.setColumnInfoList(columnInfoList);
         if (tool.stringIsEmpty(extJson)) {

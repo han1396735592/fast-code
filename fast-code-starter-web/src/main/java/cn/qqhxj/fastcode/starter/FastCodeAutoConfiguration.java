@@ -7,12 +7,16 @@ import cn.qqhxj.fastcode.core.db.MysqlDbDao;
 import cn.qqhxj.fastcode.core.service.FreemarkerService;
 import cn.qqhxj.fastcode.core.service.LocalFreemarkerServiceImpl;
 import cn.qqhxj.fastcode.core.util.FastCodeTool;
+import cn.qqhxj.fastcode.core.vo.ProjectConfig;
+import cn.qqhxj.fastcode.core.vo.TableConfig;
+import cn.qqhxj.fastcode.core.vo.TemplateConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -39,7 +43,8 @@ public class FastCodeAutoConfiguration {
     @Bean
     @ConditionalOnClass(Driver.class)
     public DbDao mysqlDbDao(FastCodeTool tool, final DataSource dataSource, FastCodeHelper helper) {
-        MysqlDbDao mysqlDbDao = new MysqlDbDao(){
+        MysqlDbDao mysqlDbDao = new MysqlDbDao() {
+            @Override
             public Connection getConnection() {
                 try {
                     return dataSource.getConnection();
@@ -64,7 +69,26 @@ public class FastCodeAutoConfiguration {
 
     @Bean
     public FreemarkerService freemarkerService(DbDao dbdao, FastCodeTool tool, FastCodeHelper helper) {
-        LocalFreemarkerServiceImpl localFreemarkerService = new LocalFreemarkerServiceImpl();
+        LocalFreemarkerServiceImpl localFreemarkerService = new LocalFreemarkerServiceImpl() {
+
+            @Async
+            @Override
+            public void generate(TableConfig config) {
+                super.generate(config);
+            }
+
+            @Async
+            @Override
+            public void generate(ProjectConfig config) {
+                super.generate(config);
+            }
+
+            @Async
+            @Override
+            public void generate(TemplateConfig config) {
+                super.generate(config);
+            }
+        };
         localFreemarkerService.setDbDao(dbdao);
         localFreemarkerService.setTool(tool);
         localFreemarkerService.setFastCodeHelper(helper);
