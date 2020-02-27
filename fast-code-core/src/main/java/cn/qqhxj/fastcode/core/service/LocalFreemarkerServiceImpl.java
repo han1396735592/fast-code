@@ -41,9 +41,13 @@ public class LocalFreemarkerServiceImpl implements FreemarkerService {
     @Override
     public void processMetaData(TemplateConfig config) {
         String s = tool.readFile(fastCodeHelper.getConfigPath() + "/metadata.json");
-        if (s != null && !"".equals(s)) {
-            HashMap hashMap = JSONObject.parseObject(s, HashMap.class);
-            config.setMetaData(hashMap);
+        if (!tool.stringIsEmpty(s)) {
+            HashMap metadata = JSONObject.parseObject(s,HashMap.class);
+            Object templates = metadata.get("templates");
+            if (templates != null) {
+                metadata.replace("templates", JSONObject.parseObject(templates.toString(),HashMap.class));
+            }
+            config.setMetaData(metadata);
         }
     }
 

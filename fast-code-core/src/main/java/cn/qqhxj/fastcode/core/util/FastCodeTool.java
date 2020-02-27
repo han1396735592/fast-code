@@ -11,6 +11,10 @@ import java.util.*;
 public class FastCodeTool {
     public final static String VARIABLE_NAME = "tool";
 
+    public String getClassName(Object object){
+        return object.getClass().getName();
+    }
+
     public String toJson(Object arguments) {
         return JSONObject.toJSONString(arguments);
     }

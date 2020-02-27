@@ -10,6 +10,7 @@ import cn.qqhxj.fastcode.core.vo.ProjectConfig;
 import cn.qqhxj.fastcode.core.vo.TableConfig;
 import cn.qqhxj.fastcode.core.vo.TemplateConfig;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.util.List;
 
+@Slf4j
 @ConditionalOnWebApplication
 @Controller
 @RequestMapping("/fastCode")
@@ -127,6 +129,7 @@ public class FastCodeController {
     @ResponseBody
     @GetMapping("/getTemplates")
     public Result<String[]> templateList() {
+        log.info("获取模板列表");
         String path = fastCodeHelper.getConfigPath() + File.separator + "templates";
         String[] list = new File(path).list();
         if (list == null) {
