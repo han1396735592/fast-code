@@ -5,7 +5,7 @@ Vue.config.productionTip = false
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import axios from 'axios'
-axios.defaults.baseURL="/api"
+axios.defaults.baseURL="/fastCode"
 Vue.prototype.$axios = axios;
 
 Vue.use(Antd);

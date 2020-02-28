@@ -12,7 +12,7 @@
   "dateFormat": {
     "type": "input",
     "default": "yyyy-MM-DD hh:mm:ss",
-    "label": "日期类型 format"
+    "label": "日期类型"
   },
   "inputType": {
     "type": "select",

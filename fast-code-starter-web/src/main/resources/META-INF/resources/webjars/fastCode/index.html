@@ -1,145 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <title>fast code</title>
-    <link href="/webjars/fastCode/index.css" rel="stylesheet">
-    <link href="/webjars/fastCode/lib/antd.min.css" rel="stylesheet">
-    <script src="/webjars/fastCode/lib/vue.js"></script>
-    <script src="/webjars/fastCode/lib/axios.min.js"></script>
-    <script src="/webjars/fastCode/lib/antd.min.js"></script>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <link rel=icon href=/favicon.ico>
+    <title>fast-code-web</title>
+    <link href=/webjars/fastCode/css/chunk-vendors.2e31bbc2.css rel=preload as=style>
+    <link href=/webjars/fastCode/js/app.3acce4d8.js rel=preload as=script>
+    <link href=/webjars/fastCode/js/chunk-vendors.c2c25be5.js rel=preload as=script>
+    <link href=/webjars/fastCode/css/chunk-vendors.2e31bbc2.css rel=stylesheet>
 </head>
 <body>
-<div id="page" style="position: fixed;width: 100%;height: 100%">
-    <a-row>
-        <a-col span="12">
-            <a-card title="配置">
-                <a-form>
-                    <a-form-item :label-col="{ span: 3 }" :wrapper-col="{ span: 11 }" label="选择表">
-                        <a-select :options="tableList" style="width: 100%" v-model="pre.table"/>
-                    </a-form-item>
-
-                    <a-form-item :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }" label="选择模板">
-                        <a-radio-group :options="templateList" v-model="pre.template"/>
-                    </a-form-item>
-                    <a-form-item :wrapper-col="{ span: 21 ,offset: 2 }">
-                        <a-button :disabled=" !pre.table " @click="saveSubmit" type="primary">
-                            保存信息
-                        </a-button>
-                        <a-button :disabled="  !pre.table || !pre.template " @click="previewSubmit"
-                                  style="margin-left: 30px" type="primary">
-                            预览
-                        </a-button>
-                    </a-form-item>
-
-                    <a-tabs defaultActiveKey="1">
-                        <a-tab-pane key="1" tab="表信息配置" v-if="tableInfo">
-                            <a-form-item :label="item.label" :label-col="{ span: 3 }" :wrapper-col="{ span: 11 }"
-                                         v-for="(item,key) in tableConfigInfo">
-
-                                <template v-if="item.type==='select'">
-                                    <a-select style="width: 100%" v-model="tableInfo.ext[key]">
-                                        <a-select-option :value="option" v-for="option in item.selectList">{{option}}
-                                        </a-select-option>
-                                    </a-select>
-                                </template>
-
-                                <template v-else-if="item.type==='switch'">
-                                    <a-switch v-model="tableInfo.ext[key]"/>
-                                </template>
-                                <template v-else-if="item.type==='textarea'">
-                                    <a-textarea v-model="tableInfo.ext[key]"></a-textarea>
-                                </template>
-                                <template v-else-if="item.type==='radio'">
-                                    <a-switch v-model="tableInfo.ext[key]"/>
-                                </template>
-                                <template v-else-if="item.type==='input'">
-                                    <a-input v-model="tableInfo.ext[key]"/>
-                                </template>
-
-                                <template v-else>
-                                    <a-input
-                                            v-model="tableInfo.ext[key]"/>
-                                </template>
-
-
-                            </a-form-item>
-                        </a-tab-pane>
-                        <a-tab-pane key="2" tab="字段信息配置" v-if="tableInfo">
-                            <a-tabs defaultActiveKey="0" style="height: 600px">
-                                <a-tab-pane :key="index" :tab="columnInfo.name"
-                                            v-for="(columnInfo,index) in tableInfo.columnInfoList">
-                                    <a-form-item :label="item.label" :label-col="{ span: 3 }"
-                                                 :wrapper-col="{ span: 11 }"
-                                                 v-for="(item,key) in columnConfigInfo">
-
-                                        <template v-if="item.type==='select'">
-                                            <a-select style="width: 100%"
-                                                      v-model="tableInfo.ext.columns[columnInfo.name][key]">
-                                                <a-select-option :value="option" v-for="option in item.selectList">
-                                                    {{option}}
-                                                </a-select-option>
-                                            </a-select>
-                                        </template>
-
-                                        <template v-else-if="item.type==='switch'">
-                                            <a-switch v-model="tableInfo.ext.columns[columnInfo.name][key]"/>
-                                        </template>
-                                        <template v-else-if="item.type==='textarea'">
-                                            <a-textarea
-                                                    v-model="tableInfo.ext.columns[columnInfo.name][key]"></a-textarea>
-                                        </template>
-                                        <template v-else-if="item.type==='radio'">
-                                            <a-switch v-model="tableInfo.ext.columns[columnInfo.name][key]"/>
-                                        </template>
-                                        <template v-else-if="item.type==='input'">
-                                            <a-input v-model="tableInfo.ext.columns[columnInfo.name][key]"/>
-                                        </template>
-
-                                        <template v-else>
-                                            <a-input
-                                                    v-model="tableInfo.ext.columns[columnInfo.name][key]"/>
-                                        </template>
-
-                                    </a-form-item>
-                                </a-tab-pane>
-                            </a-tabs>
-                        </a-tab-pane>
-                    </a-tabs>
-
-                </a-form>
-            </a-card>
-        </a-col>
-        <a-col span="12">
-            <a-card title="代码生成">
-                <a-form @submit="submit">
-                    <a-form-item :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }" label="选择表">
-                        <a-checkbox-group :options="tableList" v-model="gen.tableList"/>
-                    </a-form-item>
-                    <a-form-item :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }" label="选择模板">
-                        <a-checkbox-group :options="templateList" v-model="gen.templateList"/>
-                    </a-form-item>
-                    <a-form-item :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }" label="保存路径">
-                        <a-input v-model="gen.savePath"/>
-                    </a-form-item>
-                    <a-form-item :wrapper-col="{ span: 21 ,offset: 2}">
-                        <a-button :disabled="!gen.tableList || !gen.templateList " html-type="submit"
-                                  type="primary">
-                            生成
-                        </a-button>
-                    </a-form-item>
-                </a-form>
-            </a-card>
-            <a-card title="代码预览">
-                <a-textarea
-                        :rows="10"
-                        v-model="previewCode">
-                </a-textarea>
-            </a-card>
-
-        </a-col>
-    </a-row>
-</div>
+<noscript><strong>We're sorry but fast-code-web doesn't work properly without JavaScript enabled. Please enable it to
+    continue.</strong></noscript>
+<div id=app></div>
+<script src=/webjars/fastCode/js/chunk-vendors.c2c25be5.js></script>
+<script src=/webjars/fastCode/js/app.3acce4d8.js></script>
 </body>
-<script src="/webjars/fastCode/index.js"></script>
 </html>

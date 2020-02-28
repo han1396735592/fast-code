@@ -1,7 +1,15 @@
 <template>
-    <div>模板管理
-        <div>{{templateList}}</div>
+    <div>
+        <a-tabs defaultActiveKey="1" type="card">
+            <a-tab-pane v-for="(template,index) in templateList" :tab="template" :key="index">
+                <a-card>
+                    <a-textarea :rows="35" :value="template"></a-textarea>
+                </a-card>
+            </a-tab-pane>
+        </a-tabs>
+        <a-empty v-if="templateList.length==0"/>
     </div>
+
 </template>
 
 <script>
@@ -13,7 +21,7 @@
             }
         },
         beforeMount() {
-            this.$axios.get("/fastCode/getTemplates").then(res => {
+            this.$axios.get("/getTemplates").then(res => {
                 console.log(res)
                 this.templateList = res.data.data
             })
