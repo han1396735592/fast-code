@@ -60,9 +60,8 @@
                     console.log(res)
                     this.$message.info("生成成功")
                 }).finally(() => {
-                    this.form = {
-                        save: true
-                    }
+                    delete this.form.tableList
+                    delete this.form.templateList
                 })
             }
         }

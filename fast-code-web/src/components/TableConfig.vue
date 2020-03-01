@@ -62,6 +62,7 @@
                                   style="margin-left: 30px" type="primary">
                             预览
                         </a-button>
+                        <a-button style="margin-left: 30px" type="primary" @click="$emit('gen')">去生成代码</a-button>
                     </a-form-item>
                 </a-card>
             </a-col>

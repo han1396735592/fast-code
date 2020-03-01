@@ -26,7 +26,12 @@ export default {
   components: {
     CodeGeneration,
     TableConfig
+  },data(){
+    return {
+      action:"1"
+    }
   }
+
 }
 </script>
 
