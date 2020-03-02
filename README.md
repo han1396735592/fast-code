@@ -36,6 +36,5 @@
 
 ## `docker` 运行
 ```shell script
-docker run -d -v $configDir /fastCode/runtime/config -v $hostDir $dir / -p 10001:10001 han1396735592/fast-code:tag
+docker run -d -v $configDir /fastCode/runtime/config -v $hostDir $dir  -p 10001:10001 han1396735592/fast-code:tag
 ```
-docker 
