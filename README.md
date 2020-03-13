@@ -5,7 +5,7 @@
 ## 如何使用
 
 请参考 [fast-code-admin](fast-code-admin)
-1. 引入`stater`
+1. 引入`stater` `starter`未上传到maven中心仓库。请自行下载，进行构建打包
     ```xml
     <dependency>
         <artifactId>fast-code-starter-web</artifactId>
